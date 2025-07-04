@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>WhatsApp DP Downloader</title></head>
+<body>
+  <h2>Enter WhatsApp Number</h2>
+  <input id="number" placeholder="94XXXXXXXXX"/>
+  <button onclick="getDP()">Get DP</button>
+  <div id="result"></div>
+
+  <script>
+    async function getDP() {
+      const num = document.getElementById('number').value
+      const res = await fetch(`/dp/${num}`)
+      const data = await res.json()
+      if(data.success) {
+        document.getElementById('result').innerHTML =
+          `<img src="${data.dp}" width="200"/><br><a href="${data.dp}" download>Download DP</a>`
+      } else {
+        document.getElementById('result').innerText = "DP not found or blocked."
+      }
+    }
+  </script>
+</body>
+</html>
